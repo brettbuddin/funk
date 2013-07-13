@@ -84,7 +84,7 @@
     //      initial - (optional) mixed
     //
     // Examples:
-    //      reduce([1, 2, 3], function(last, next) { 
+    //      fold([1, 2, 3], function(last, next) { 
     //          return last * next; 
     //      });
     //      //=> 6
