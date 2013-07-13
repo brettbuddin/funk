@@ -213,10 +213,9 @@
     //
     var compose = variadic(function(fns) {
         return function(value) {
-            for (var i = fns.length-1; i >= 0; i--) {
-                value = fns[i](value);
-            }
-            return value;
+            return fold(reverse(fns), function(result, fn) {
+                return fn(result);
+            }, value);
         };
     });
 
