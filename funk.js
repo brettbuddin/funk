@@ -122,11 +122,83 @@
         }, []);
     };
 
+    // Acts as a unary function.
+    // Arguments:
+    //      fn - unary function
+    // Examples:
+    //      var addOne = function(x) {
+    //          return x + 1;
+    //      };
+    //      unary(addOne)(1);
+    //      //=> 2
+    //
+    function unary(fn) {
+        return function(x) {
+            return fn(x);
+        }
+    }
+
+    // Acts as a binary function that, if presented with only
+    // one parameter will return a partial application.
+    // Arguments:
+    //      fn - binary function
+    // Examples:
+    //      var add = function(x, y) {
+    //          return x + y;
+    //      };
+    //      binary(add)(1)(2);
+    //      //=> 3
+    //      binary(add)(1, 2);
+    //      //=> 3
+    //
+    function binary(fn) {
+        return function binary(x, y) {
+            if (y === undefined) {
+                return unary(function(x) {
+                    return fn(x, y);
+                });
+            }
+            return fn(x, y);
+        }
+    }
+
+    // Acts as a ternary function that, if presented with some
+    // of the paramaters will return a partial application.
+    // Arguments:
+    //      fn - ternary function
+    // Examples:
+    //      var mult = function(x, y, z) {
+    //          return x * y * z;
+    //      };
+    //      ternary(mult)(1)(2)(3);
+    //      //=> 6
+    //      ternary(mult)(1, 2, 3);
+    //      //=> 6
+    //
+    function ternary(fn) {
+        return function ternary(x, y, z) {
+            if (y === undefined) {
+                return binary(function(y, z) {
+                    return fn(x, y, z);
+                });
+            }
+            if (z === undefined) {
+                return unary(function(z) {
+                    return fn(x, y, z);
+                });
+            }
+            return fn(x, y, z);
+        }
+    }
+
     root.funk = {
         variadic: variadic,
         map: map,
         fold: fold,
         filter: filter,
         reverse: reverse,
+        unary: unary,
+        binary: binary,
+        ternary: ternary
     };
 })()
