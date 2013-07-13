@@ -79,19 +79,36 @@
         return _array.map.call(list, fn);
     }
 
-    // Aggregates the values in the list given by the given binary function.
+    // Aggregates from left to right.
     // Arguments:
     //      list    - array
     //      fn      - binary function
     //      initial - (optional) mixed
     // Examples:
-    //      fold([1, 2, 3], function(last, next) { 
+    //      foldLeft([1, 2, 3], function(last, next) { 
     //          return last * next; 
     //      });
+    //      // (1 * 2) * 3)
     //      //=> 6
     //
-    function fold(list, fn, initial) {
+    function foldLeft(list, fn, initial) {
         return _array.reduce.call(list, fn, initial);
+    }
+
+    // Aggregates from right to left.
+    // Arguments:
+    //      list    - array
+    //      fn      - binary function
+    //      initial - (optional) mixed
+    // Examples:
+    //      foldRight([1, 2, 3], function(last, next) { 
+    //          return last * next; 
+    //      });
+    //      // (3 * 2) * 1)
+    //      //=> 6
+    //
+    function foldRight(list, fn, initial) {
+        return _array.reduce.call(reverse(list), fn, initial);
     }
 
     // Selects items from the list that pass the test function.
@@ -116,7 +133,7 @@
     //      //=> [3, 2, 1]
     //
     function reverse(list) {
-        return fold(list, function(result, item) {
+        return foldLeft(list, function(result, item) {
             result.unshift(item);
             return result;
         }, []);
@@ -213,7 +230,7 @@
     //
     var compose = variadic(function(fns) {
         return function(value) {
-            return fold(fns, function(result, fn) {
+            return foldRight(fns, function(result, fn) {
                 return fn(result);
             }, value);
         };
@@ -236,18 +253,23 @@
     //      };
     //
     //      // three(two(one(x)))
-    //      var combined = compose(three, two, one);
+    //      var combined = compose(one, two, three);
     //      combined(1);
     //      //=> 7
     //
     var chain = variadic(function(fns) {
-        return compose.apply(this, reverse(fns));
-    });;
+        return function(value) {
+            return foldLeft(fns, function(result, fn) {
+                return fn(result);
+            }, value);
+        };
+    });
 
     root.funk = {
         variadic: variadic,
         map: map,
-        fold: fold,
+        foldLeft: foldLeft,
+        foldRight: foldRight,
         filter: filter,
         reverse: reverse,
         unary: unary,
