@@ -8,9 +8,9 @@
     //          return args; 
     //      });
     //
-    //      fn()         //=> [] 
-    //      fn('a')      //=> ['a']
-    //      fn('a', 'b') //=> ['a', 'b']
+    //      fn()              //=> []
+    //      fn('a')           //=> ['a']
+    //      fn('a', 'b')      //=> ['a', 'b']
     //      fn('a', 'b', 'c') //=> ['a', 'b', 'c']
     //
     //      var two = variadic(function(one, rest) { 
