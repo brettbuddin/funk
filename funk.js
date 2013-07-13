@@ -219,6 +219,31 @@
         };
     });
 
+    // The same as `compose`,  but the argument order is flipped.
+    // While `compose` invokes the functions from right to left, `chain`
+    // invokes them from left to right.
+    // Arguments:
+    //      fns - unary functions (many)
+    // Examples:
+    //      var one = function(x) {
+    //          return x + 1;
+    //      };
+    //      var two = function(x) {
+    //          return x + 2;
+    //      };
+    //      var three = function(x) {
+    //          return x + 3;
+    //      };
+    //
+    //      // three(two(one(x)))
+    //      var combined = compose(three, two, one);
+    //      combined(1);
+    //      //=> 7
+    //
+    var chain = variadic(function(fns) {
+        return compose.apply(this, reverse(fns));
+    });;
+
     root.funk = {
         variadic: variadic,
         map: map,
@@ -228,6 +253,7 @@
         unary: unary,
         binary: binary,
         ternary: ternary,
-        compose: compose
+        compose: compose,
+        chain: chain
     };
 })()
