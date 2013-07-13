@@ -162,8 +162,8 @@
         }
     }
 
-    // Acts as a ternary function that, if presented with some
-    // of the paramaters will return a partial application.
+    // Acts as a ternary function that, if presented with only some
+    // of the parameters will return a partial application.
     // Arguments:
     //      fn - ternary function
     // Examples:
