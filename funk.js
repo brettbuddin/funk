@@ -192,7 +192,7 @@
     }
 	
     // Combine smaller functions into a more complex one.
-	// The result of each function is passed as an argument ofthe next.
+    // The result of each function is passed as an argument ofthe next.
     // Arguments:
     //      fns - unary function
     // Examples:
@@ -205,8 +205,8 @@
     //      var three = function(x) {
     //          return x + 3;
     //      };
-	//		
-	//		// three(two(one(x)))
+    //
+    //      // three(two(one(x)))
     //      var combined = compose(one, two, three);
     //      combined(1);
     //      //=> 7
