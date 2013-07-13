@@ -3,7 +3,8 @@
         _array = {
             map:    Array.prototype.map,
             reduce: Array.prototype.reduce,
-            slice:  Array.prototype.slice
+            slice:  Array.prototype.slice,
+            filter: Array.prototype.filter
         }
 
     // Converts an n-ary function into a variadic function.
@@ -93,9 +94,25 @@
         return _array.reduce.call(list, fn, initial);
     }
 
+    // Selects items from the list that pass the test function.
+    // Arguments:
+    //      list    - array
+    //      fn      - unary function
+    //
+    // Examples:
+    //      filter([1, 2, 3, 4, 5, 6], function(x) { 
+    //          return (x % 2 === 0);
+    //      });
+    //      //=> [2, 4, 6]
+    //
+    function filter(list, fn) {
+        return _array.filter.call(list, fn);
+    }
+
     root.funk = {
-        variadic: variadic
+        variadic: variadic,
         map: map,
-        fold: fold
+        fold: fold,
+        filter: filter
     };
 })()
