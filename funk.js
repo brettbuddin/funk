@@ -13,7 +13,6 @@
     // Converts an n-ary function into a variadic function.
     // Arguments:
     //      fn - n-ary function
-    //
     // Examples:
     //      var one = variadic(function(args) { 
     //          return args; 
@@ -70,7 +69,6 @@
     // Arguments:
     //      list - array
     //      fn   - unary function
-    //
     // Examples:
     //      map([1, 2, 3], function(x) { 
     //          return x * 2; 
@@ -86,7 +84,6 @@
     //      list    - array
     //      fn      - binary function
     //      initial - (optional) mixed
-    //
     // Examples:
     //      fold([1, 2, 3], function(last, next) { 
     //          return last * next; 
@@ -101,7 +98,6 @@
     // Arguments:
     //      list    - array
     //      fn      - unary function
-    //
     // Examples:
     //      filter([1, 2, 3, 4, 5, 6], function(x) { 
     //          return (x % 2 === 0);
@@ -115,7 +111,6 @@
     // Reverses items in a list.
     // Arguments:
     //      list    - array
-    //
     // Examples:
     //      reverse([1, 2, 3]);
     //      //=> [3, 2, 1]
