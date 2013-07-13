@@ -89,14 +89,13 @@
     //      });
     //      //=> 6
     //
-    function reduce(list, fn, initial) {
+    function fold(list, fn, initial) {
         return _array.reduce.call(list, fn, initial);
     }
 
     root.funk = {
         variadic: variadic
         map: map,
-        reduce: reduce,
-        fold: reduce
+        fold: fold
     };
 })()
