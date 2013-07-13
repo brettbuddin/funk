@@ -1,8 +1,15 @@
 (function() {
-    var root  = this,
-        slice = Array.prototype.slice;
+    var root   = this,
+        _array = {
+            map:    Array.prototype.map,
+            reduce: Array.prototype.reduce,
+            slice:  Array.prototype.slice
+        }
 
     // Converts an n-ary function into a variadic function.
+    // Arguments:
+    //      fn - n-ary function
+    //
     // Examples:
     //      var one = variadic(function(args) { 
     //          return args; 
@@ -42,7 +49,7 @@
         }
 
         return function() {
-            var args = slice.call(arguments);
+            var args = _array.slice.call(arguments);
 
             if (arity === 1) {
                 return fn.apply(this, [args]);
@@ -55,7 +62,41 @@
         }
     }
 
+    // Applies a given unary function to each item in a list.
+    // Arguments:
+    //      list - array
+    //      fn   - unary function
+    //
+    // Examples:
+    //      map([1, 2, 3], function(x) { 
+    //          return x * 2; 
+    //      });
+    //      //=> [2, 4, 6]
+    //
+    function map(list, fn) {
+        return _array.map.call(list, fn);
+    }
+
+    // Aggregates the values in the list given by the given binary function.
+    // Arguments:
+    //      list    - array
+    //      fn      - binary function
+    //      initial - (optional) mixed
+    //
+    // Examples:
+    //      reduce([1, 2, 3], function(last, next) { 
+    //          return last * next; 
+    //      });
+    //      //=> 6
+    //
+    function reduce(list, fn, initial) {
+        return _array.reduce.call(list, fn, initial);
+    }
+
     root.funk = {
         variadic: variadic
+        map: map,
+        reduce: reduce,
+        fold: reduce
     };
 })()
