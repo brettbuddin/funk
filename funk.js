@@ -1,5 +1,8 @@
 (function() {
     var root   = this,
+        _obj   = {
+            toString: Object.prototype.toString
+        },
         _array = {
             map:    Array.prototype.map,
             reduce: Array.prototype.reduce,
@@ -109,10 +112,26 @@
         return _array.filter.call(list, fn);
     }
 
+    // Reverses items in a list.
+    // Arguments:
+    //      list    - array
+    //
+    // Examples:
+    //      reverse([1, 2, 3]);
+    //      //=> [3, 2, 1]
+    //
+    function reverse(list) {
+        return fold(list, function(result, item) {
+            result.unshift(item);
+            return result;
+        }, []);
+    };
+
     root.funk = {
         variadic: variadic,
         map: map,
         fold: fold,
-        filter: filter
+        filter: filter,
+        reverse: reverse,
     };
 })()
