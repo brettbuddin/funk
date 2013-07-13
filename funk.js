@@ -213,7 +213,7 @@
     //
     var compose = variadic(function(fns) {
         return function(value) {
-            return fold(reverse(fns), function(result, fn) {
+            return fold(fns, function(result, fn) {
                 return fn(result);
             }, value);
         };
