@@ -194,7 +194,7 @@
     // Combine smaller functions into a more complex one.
     // The result of each function is passed as an argument ofthe next.
     // Arguments:
-    //      fns - unary function
+    //      fns - unary functions (many)
     // Examples:
     //      var one = function(x) {
     //          return x + 1;
